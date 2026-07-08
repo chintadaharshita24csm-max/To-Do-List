@@ -1,76 +1,28 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
+const taskInput = document.getElementById("taskInput");
+const addBtn = document.getElementById("addBtn");
+const taskList = document.getElementById("taskList");
 
-body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    background:linear-gradient(135deg,#667eea,#764ba2);
-}
+addBtn.addEventListener("click", addTask);
 
-.container{
-    background:#fff;
-    padding:30px;
-    border-radius:15px;
-    width:400px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.3);
-}
+function addTask() {
 
-h1{
-    text-align:center;
-    margin-bottom:20px;
-}
+    if (taskInput.value === "") {
+        alert("Please enter a task!");
+        return;
+    }
 
-.input-box{
-    display:flex;
-    gap:10px;
-}
+    const li = document.createElement("li");
 
-input{
-    flex:1;
-    padding:10px;
-    border:2px solid #ccc;
-    border-radius:8px;
-}
+    li.innerHTML = `
+        <span>${taskInput.value}</span>
+        <button class="delete">Delete</button>
+    `;
 
-button{
-    padding:10px 20px;
-    background:#667eea;
-    color:white;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-}
+    taskList.appendChild(li);
 
-button:hover{
-    background:#5a67d8;
-}
+    taskInput.value = "";
 
-ul{
-    list-style:none;
-    margin-top:20px;
-}
-
-li{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:#f4f4f4;
-    padding:10px;
-    margin-bottom:10px;
-    border-radius:8px;
-}
-
-.delete{
-    background:red;
-    color:white;
-    border:none;
-    padding:5px 10px;
-    border-radius:5px;
-    cursor:pointer;
+    li.querySelector(".delete").addEventListener("click", function () {
+        li.remove();
+    });
 }
